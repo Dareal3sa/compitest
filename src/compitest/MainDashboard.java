@@ -4,10 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
 import java.util.regex.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
@@ -24,14 +21,6 @@ public class MainDashboard extends JFrame implements ActionListener {
     private boolean lexicalPassed = false;
     private boolean syntaxPassed = false;
     
-    private List<String> fileContents;
-    private String contents;
-
-    // Lexical Analysis components
-    private final String[] keywords = {"public", "private", "class", "static", "void", "int", "double", "String"};
-    private final String[] operators = {"+", "-", "*", "/", "=", "==", "!=", "<", ">", "<=", ">="};
-    private final Pattern identifierPattern = Pattern.compile("[a-zA-Z][a-zA-Z0-9]*");
-    private final Pattern numberPattern = Pattern.compile("\\d+(\\.\\d+)?");
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -48,7 +37,6 @@ public class MainDashboard extends JFrame implements ActionListener {
     	setTitle("compiler");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 895, 626);
-        fileContents = new ArrayList<>();
         initializeComponents();
     }
 
@@ -226,28 +214,17 @@ public class MainDashboard extends JFrame implements ActionListener {
 
 
  // Method para sa Semantic Analysis
-    private void performSemanticAnalysis() {
-        String code = codeTextArea.getText();
-        List<String> codeLines = new ArrayList<>(Arrays.asList(code.split("\n")));
-        
-        CompilerComponents analyzer = new CompilerComponents();
-        
-        // Perform semantic analysis
-        String semAnalysisResult = analyzer.semanticAnalysis(codeLines);
-        
-        StringBuilder output = new StringBuilder();
-        output.append("Semantic Analysis Results:\n\n");
-        
-        for (int i = 0; i < codeLines.size(); i++) {
-            output.append("Line ").append(i + 1).append(": ");
-            output.append(codeLines.get(i)).append("\n");
-            output.append("Result: ").append(analyzer.semanticAnalysisSingleLine(codeLines.get(i))).append("\n\n");
-        }
-        
-        output.append("Final Result: ").append(semAnalysisResult);
-        
-        outputTextArea.setText(output.toString());
-    }
+ private void performSemanticAnalysis() {
+    String code = codeTextArea.getText();
+    List<String> codeLines = new ArrayList<>(Arrays.asList(code.split("\n")));
+
+    CompilerComponents analyzer = new CompilerComponents();
+
+    // Perform semantic analysis
+    String semAnalysisResult = analyzer.semanticAnalysis(codeLines);
+
+    outputTextArea.setText("Semantic Analysis Results:\n\n" + semAnalysisResult);
+}
 
 
     private void clearAll() {

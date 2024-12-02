@@ -10,13 +10,18 @@ public class CompilerComponents {
 
     public String lexicalAnalysis(String code) {
         StringBuilder tokenizedLines = new StringBuilder();
+        // Use a different split pattern to preserve string literals
+        Pattern pattern = Pattern.compile("\"[^\"]*\"|[\\s;=]|([^\\s;=\"]+)");
         String[] lines = code.split("\n");
 
         for (String line : lines) {
             StringBuilder tokenizedLine = new StringBuilder();
-            String[] tokens = line.trim().split("\\s+|;");
-
-            for (String token : tokens) {
+            Matcher matcher = pattern.matcher(line.trim());
+            
+            while (matcher.find()) {
+                String token = matcher.group().trim();
+                if (token.isEmpty()) continue;
+                
                 if (isDataType(token)) {
                     tokenizedLine.append("<data_type> ");
                 } else if (isIdentifier(token)) {
@@ -27,31 +32,32 @@ public class CompilerComponents {
                     tokenizedLine.append("<value> ");
                 } else if (token.equals(";")) {
                     tokenizedLine.append("<delimiter> ");
-                } else {
+                } else if (!token.matches("\\s+")) { // ignore whitespace
                     tokenizedLine.append("<unknown> ");
                 }
             }
-            tokenizedLines.append(tokenizedLine.toString().trim()).append("\n");
+            if (tokenizedLine.length() > 0) {
+                tokenizedLines.append(tokenizedLine.toString().trim()).append("\n");
+            }
         }
         return tokenizedLines.toString().trim();
     }
-    
+
     public boolean syntaxAnalysis(String lexAnalysisResult) {
-        Pattern validPattern = Pattern.compile("(<data_type> <identifier> (<operator> <value>)? <delimiter>)");
+        Pattern validPattern = Pattern.compile("(<data_type> <identifier>(?: <operator> <value>)? <delimiter>)");
         Matcher matcher = validPattern.matcher(lexAnalysisResult);
         return matcher.matches();
     }
-    
-        public String semanticAnalysis(String code) {
-            return semanticAnalysisSingleLine(code);
-        }
 
+    public void semanticAnalysis(String code) {
+        List<String> codeLines = new ArrayList<>(Arrays.asList(code.split("\n")));
+        semanticAnalysisForLines(codeLines);
+    }
 
-    
-    public String semanticAnalysis(List<String> codeLines) {
+    public void semanticAnalysisForLines(List<String> codeLines) {
         boolean hasError = false;
         StringBuilder result = new StringBuilder();
-        
+
         for (String line : codeLines) {
             String lineResult = semanticAnalysisSingleLine(line);
             if (lineResult.contains("Error")) {
@@ -59,23 +65,26 @@ public class CompilerComponents {
             }
             result.append(lineResult).append("\n");
         }
-        
-        return hasError ? "Semantic Analysis Failed" : "Semantic Analysis Passed";
+
+        System.out.println(hasError ? "Semantic Analysis Failed" : "Semantic Analysis Passed");
+        System.out.println(result.toString());
     }
-    
+
     public String semanticAnalysisSingleLine(String line) {
         String[] tokens = line.trim().split("\\s+");
-        if (tokens.length < 2) return "Error: Invalid statement";
-        
+        if (tokens.length < 2 || tokens.length > 4) return "Error: Invalid statement";
+    
         String dataType = tokens[0];
-        String value = tokens.length >= 4 ? tokens[3] : "";
-        
+        String identifier = tokens[1];
+        String value = (tokens.length == 4) ? tokens[3] : "";
+    
         if (!isDataType(dataType)) return "Error: Invalid data type";
-        
-        if (value.length() > 0 && !isValueCompatibleWithType(dataType, value)) {
+        if (!isIdentifier(identifier)) return "Error: Invalid identifier";
+    
+        if (tokens.length == 4 && !isValueCompatibleWithType(dataType, value)) {
             return "Error: Type mismatch - " + value + " is not compatible with " + dataType;
         }
-        
+    
         return "Valid declaration/initialization";
     }
     
@@ -111,11 +120,30 @@ public class CompilerComponents {
             case "float":
                 return value.matches("\\d*\\.\\d+") || value.matches("\\d+");
             case "String":
-                return value.matches("\".*\"");
+                return value.matches("\"[^\"]*\""); // Updated regex to match non-empty string literals
             case "boolean":
                 return value.matches("true|false");
             default:
                 return false;
+        }
+    }
+
+    public String semanticAnalysis(List<String> codeLines) {
+        StringBuilder result = new StringBuilder();
+        boolean hasError = false;
+    
+        for (String line : codeLines) {
+            String lineResult = semanticAnalysisSingleLine(line);
+            if (lineResult.startsWith("Error:")) {
+                hasError = true;
+            }
+            result.append(lineResult).append("\n");
+        }
+    
+        if (hasError) {
+            return "Semantic Analysis Failed";
+        } else {
+            return "Semantic Analysis Passed";
         }
     }
 }
