@@ -37,7 +37,7 @@ public class group extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 887, 620);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 102, 102));
+		contentPane.setBackground(new Color(255, 235, 205));
 		contentPane.setForeground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -45,23 +45,28 @@ public class group extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Group");
-		lblNewLabel.setFont(new Font("Arial Black", Font.BOLD, 30));
+		lblNewLabel.setForeground(new Color(160, 82, 45));
+		lblNewLabel.setBackground(new Color(255, 235, 205));
+		lblNewLabel.setFont(new Font("Georgia", Font.BOLD, 30));
 		lblNewLabel.setBounds(85, 69, 263, 48);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("M");
-		lblNewLabel_1.setFont(new Font("Arial Black", Font.BOLD, 30));
-		lblNewLabel_1.setBounds(78, 183, 314, 67);
+		JLabel lblNewLabel_1 = new JLabel("Manampan, Daryl Trisha");
+		lblNewLabel_1.setForeground(new Color(160, 82, 45));
+		lblNewLabel_1.setFont(new Font("Georgia", Font.BOLD, 30));
+		lblNewLabel_1.setBounds(78, 183, 509, 67);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("M");
-		lblNewLabel_1_1.setFont(new Font("Arial Black", Font.BOLD, 30));
-		lblNewLabel_1_1.setBounds(78, 278, 314, 67);
+		JLabel lblNewLabel_1_1 = new JLabel("Macabales, Francine Ella G.");
+		lblNewLabel_1_1.setForeground(new Color(160, 82, 45));
+		lblNewLabel_1_1.setFont(new Font("Georgia", Font.BOLD, 30));
+		lblNewLabel_1_1.setBounds(78, 278, 550, 67);
 		contentPane.add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("S");
-		lblNewLabel_1_2.setFont(new Font("Arial Black", Font.BOLD, 30));
-		lblNewLabel_1_2.setBounds(78, 371, 314, 67);
+		JLabel lblNewLabel_1_2 = new JLabel("Solitario, Vina Marie");
+		lblNewLabel_1_2.setForeground(new Color(160, 82, 45));
+		lblNewLabel_1_2.setFont(new Font("Georgia", Font.BOLD, 30));
+		lblNewLabel_1_2.setBounds(78, 371, 539, 67);
 		contentPane.add(lblNewLabel_1_2);
 	}
 }
