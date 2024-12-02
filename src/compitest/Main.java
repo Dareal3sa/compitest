@@ -33,14 +33,14 @@ public class Main extends JFrame implements ActionListener {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 850, 500);
 			contentPane = new JPanel();
-			contentPane.setBackground(new Color(0, 102, 102));
+			contentPane.setBackground(new Color(255, 235, 205));
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 			
-			JLabel appName = new JLabel("Compiler");
-			appName.setForeground(new Color(192, 192, 192));
+			JLabel appName = new JLabel("Compitest");
+			appName.setForeground(new Color(0, 0, 0));
 			appName.setFont(new Font("Impact", Font.ITALIC, 50));
 			appName.setHorizontalAlignment(SwingConstants.CENTER);
 			appName.setBounds(152, 102, 530, 110);
