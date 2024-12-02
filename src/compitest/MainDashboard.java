@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.border.EmptyBorder;
@@ -160,7 +159,7 @@ public class MainDashboard extends JFrame implements ActionListener {
         outputTextArea.setBounds(28, 14, 555, 72);
         outputTextArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane outputScrollPane = new JScrollPane(outputTextArea);
-        outputScrollPane.setBounds(28, 14, 555, 72);
+        outputScrollPane.setBounds(28, 14, 555, 130);
         displayPanel.add(outputScrollPane);
         
         // exit button
