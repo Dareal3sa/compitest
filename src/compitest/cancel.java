@@ -38,11 +38,14 @@ public class cancel extends JDialog {
 	public cancel() {
 		setBounds(100, 100, 800, 200);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(255, 235, 205));
+		contentPanel.setForeground(new Color(255, 235, 205));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNewLabel = new JLabel("Are you sure you want to Exit?");
+			lblNewLabel.setForeground(new Color(160, 82, 45));
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 15));
 			lblNewLabel.setBounds(158, 46, 467, 37);
@@ -50,7 +53,8 @@ public class cancel extends JDialog {
 		}
 		{
 			JButton okButton = new JButton("OK");
-			okButton.setBackground(new Color(192, 192, 192));
+			okButton.setForeground(new Color(160, 82, 45));
+			okButton.setBackground(new Color(240, 248, 255));
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.exit(0);
@@ -63,7 +67,8 @@ public class cancel extends JDialog {
 		}
 		{
 			JButton cancelButton = new JButton("Cancel");
-			cancelButton.setBackground(new Color(192, 192, 192));
+			cancelButton.setForeground(new Color(160, 82, 45));
+			cancelButton.setBackground(new Color(240, 248, 255));
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Main startApp = new Main();
@@ -78,6 +83,8 @@ public class cancel extends JDialog {
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Confirm ");
+			lblNewLabel_2.setForeground(new Color(160, 82, 45));
+			lblNewLabel_2.setBackground(new Color(255, 228, 196));
 			lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_2.setFont(new Font("Arial Black", Font.PLAIN, 20));
 			lblNewLabel_2.setBounds(158, 11, 467, 37);
@@ -85,6 +92,7 @@ public class cancel extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(255, 228, 196));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

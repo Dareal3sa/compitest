@@ -9,6 +9,7 @@ import java.util.regex.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 
 public class MainDashboard extends JFrame implements ActionListener {
@@ -42,21 +43,24 @@ public class MainDashboard extends JFrame implements ActionListener {
 
     private void initializeComponents() {
         contentPane = new JPanel();
-        contentPane.setBackground(new Color(0, 102, 102));
+        contentPane.setBackground(new Color(255, 235, 205));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
         // Button Panel
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(0, 102, 102));
+        buttonPanel.setBackground(new Color(255, 235, 205));
         buttonPanel.setBounds(0, 0, 213, 566);
         contentPane.add(buttonPanel);
         buttonPanel.setLayout(null);
         
         // Open Button
         JButton btnOpen = new JButton("OPEN");
-        btnOpen.setBounds(10, 66, 193, 33);
+        btnOpen.setBackground(new Color(255, 228, 196));
+        btnOpen.setForeground(new Color(160, 82, 45));
+        btnOpen.setFont(new Font("Georgia", Font.BOLD, 20));
+        btnOpen.setBounds(10, 165, 193, 40);
         btnOpen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
@@ -92,36 +96,51 @@ public class MainDashboard extends JFrame implements ActionListener {
         
         // Analysis Buttons
         JButton btnLexical = new JButton("Lexical Analysis");
-        btnLexical.setBounds(10, 165, 193, 33);
+        btnLexical.setForeground(new Color(160, 82, 45));
+        btnLexical.setBackground(new Color(255, 228, 196));
+        btnLexical.setFont(new Font("Georgia", Font.BOLD, 17));
+        btnLexical.setBounds(10, 220, 193, 40);
         btnLexical.addActionListener(e -> performLexicalAnalysis());
         buttonPanel.add(btnLexical);
         
         syntaxButton = new JButton("Syntax Analysis");
-        syntaxButton.setBounds(10, 264, 193, 33);
+        syntaxButton.setBackground(new Color(255, 228, 196));
+        syntaxButton.setForeground(new Color(160, 82, 45));
+        syntaxButton.setFont(new Font("Georgia", Font.BOLD, 17));
+        syntaxButton.setBounds(10, 275, 193, 40);
         syntaxButton.addActionListener(e -> performSyntaxAnalysis());
         syntaxButton.setEnabled(false);
         buttonPanel.add(syntaxButton);
         
         semanticButton = new JButton("Semantic Analysis");
-        semanticButton.setBounds(10, 363, 193, 33);
+        semanticButton.setBackground(new Color(255, 228, 196));
+        semanticButton.setForeground(new Color(160, 82, 45));
+        semanticButton.setFont(new Font("Georgia", Font.BOLD, 15));
+        semanticButton.setBounds(10, 330, 193, 40);
         semanticButton.addActionListener(e -> performSemanticAnalysis());
         semanticButton.setEnabled(false);
         buttonPanel.add(semanticButton);
         
         // clear button
         JButton btnClear = new JButton("CLEAR");
-        btnClear.setBounds(10, 462, 193, 33);
+        btnClear.setBackground(new Color(255, 228, 196));
+        btnClear.setForeground(new Color(160, 82, 45));
+        btnClear.setFont(new Font("Georgia", Font.BOLD, 17));
+        btnClear.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+        btnClear.setBorder(BorderFactory.createEtchedBorder());
+        btnClear.setBounds(10, 410, 193, 40);
         btnClear.addActionListener(e -> clearAll());
         buttonPanel.add(btnClear);
         
         // content panel para sa input text or variables na itetest
         JPanel contentPanel = new JPanel();
-        contentPanel.setBackground(new Color(0, 102, 102));
+        contentPanel.setBackground(new Color(255, 235, 205));
         contentPanel.setBounds(212, 151, 611, 368);
         contentPane.add(contentPanel);
         contentPanel.setLayout(null);
         
         codeTextArea = new JTextArea();
+        codeTextArea.setBackground(new Color(255, 228, 196));
         codeTextArea.setBounds(30, 8, 551, 398);
         codeTextArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane codeScrollPane = new JScrollPane(codeTextArea);
@@ -130,14 +149,15 @@ public class MainDashboard extends JFrame implements ActionListener {
         
      // display panel para sa output
         JPanel displayPanel = new JPanel();
-        displayPanel.setBackground(new Color(0, 102, 102));
+        displayPanel.setBackground(new Color(255, 235, 205));
         displayPanel.setBounds(212, 0, 611, 149);
         contentPane.add(displayPanel);
         displayPanel.setLayout(null);
 
         outputTextArea = new JTextArea();
-        outputTextArea.setBounds(28, 14, 555, 72);
+        outputTextArea.setBackground(new Color(255, 228, 196));
         outputTextArea.setEditable(false);
+        outputTextArea.setBounds(28, 14, 555, 72);
         outputTextArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane outputScrollPane = new JScrollPane(outputTextArea);
         outputScrollPane.setBounds(28, 14, 555, 72);
@@ -145,6 +165,9 @@ public class MainDashboard extends JFrame implements ActionListener {
         
         // exit button
         JButton btnExit = new JButton("Group");
+        btnExit.setBackground(new Color(255, 228, 196));
+        btnExit.setForeground(new Color(160, 82, 45));
+        btnExit.setFont(new Font("Georgia", Font.BOLD, 15));
         btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				group info = new group();
@@ -154,7 +177,7 @@ public class MainDashboard extends JFrame implements ActionListener {
 			}
 		
 		});
-        btnExit.setBounds(780, 553, 89, 23);
+        btnExit.setBounds(750, 540, 100, 30);
         contentPane.add(btnExit);
     }
     
