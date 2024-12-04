@@ -11,7 +11,7 @@ public class Components {
     //lexical analysis method
     public String lexicalAnalysis(String code) {
         StringBuilder tokenizedLines = new StringBuilder();
-        Pattern pattern = Pattern.compile("\"[^\"]*\"|[\\s;=]|([^\\s;=\"]+)");
+        Pattern pattern = Pattern.compile("\"[^\"]*\"|[a-zA-Z][a-zA-Z0-9]*|[\\d\\.]+|[=;]|\\S");
         String[] lines = code.split("\n");
         
         //data types to check in syntax
@@ -47,7 +47,10 @@ public class Components {
     public boolean syntaxAnalysis(String lexAnalysisResult) {
         Pattern validPattern = Pattern.compile("(<data_type> <identifier>(?: <operator> <value>)? <delimiter>)");
         Matcher matcher = validPattern.matcher(lexAnalysisResult);
-        return matcher.matches();
+        while (matcher.find()) {
+        	return true;
+        }
+        return false;
     }
 
     //method for semantic analysis
@@ -109,6 +112,7 @@ public class Components {
         return token.matches("\\d+") || 
                token.matches("\\d*\\.\\d+") || 
                token.matches("\".*\"") || 
+               token.matches("'.'") ||
                token.matches("true|false");
     }
     
@@ -123,6 +127,8 @@ public class Components {
                 return value.matches("\\d*\\.\\d+") || value.matches("\\d+");
             case "String":
                 return value.matches("\"[^\"]*\""); 
+            case "char":
+            	return value.matches("'.'");
             case "boolean":
                 return value.matches("true|false");
             default:
