@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 
-public class group extends JFrame {
+public class Group extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -21,7 +21,7 @@ public class group extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					group frame = new group();
+					Group frame = new Group();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,9 +33,10 @@ public class group extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public group() {
+	public Group() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 887, 620);
+    	setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 235, 205));
 		contentPane.setForeground(new Color(0, 0, 0));

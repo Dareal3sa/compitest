@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class cancel extends JDialog {
+public class Exit extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -24,7 +24,7 @@ public class cancel extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			cancel dialog = new cancel();
+			Exit dialog = new Exit();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -35,7 +35,7 @@ public class cancel extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public cancel() {
+	public Exit() {
 		setBounds(100, 100, 800, 200);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 235, 205));

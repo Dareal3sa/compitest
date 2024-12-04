@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 
-public class MainDashboard extends JFrame implements ActionListener {
+public class Dashboard extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextArea codeTextArea;
@@ -25,7 +25,7 @@ public class MainDashboard extends JFrame implements ActionListener {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                MainDashboard frame = new MainDashboard();
+                Dashboard frame = new Dashboard();
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -33,28 +33,29 @@ public class MainDashboard extends JFrame implements ActionListener {
         });
     }
 
-    public MainDashboard() {
+    public Dashboard() {
     	setTitle("compiler");
+    	setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 895, 626);
-        initializeComponents();
+        mainContentsPane();
     }
 
-    private void initializeComponents() {
+    private void mainContentsPane() {
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 235, 205));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        // Button Panel
+        // button panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(255, 235, 205));
         buttonPanel.setBounds(0, 0, 213, 566);
         contentPane.add(buttonPanel);
         buttonPanel.setLayout(null);
         
-        // Open Button
+        // open file button
         JButton btnOpen = new JButton("OPEN");
         btnOpen.setBackground(new Color(255, 228, 196));
         btnOpen.setForeground(new Color(160, 82, 45));
@@ -93,7 +94,7 @@ public class MainDashboard extends JFrame implements ActionListener {
         });
         buttonPanel.add(btnOpen);
         
-        // Analysis Buttons
+        // aalysis buttons
         JButton btnLexical = new JButton("Lexical Analysis");
         btnLexical.setForeground(new Color(160, 82, 45));
         btnLexical.setBackground(new Color(255, 228, 196));
@@ -146,7 +147,7 @@ public class MainDashboard extends JFrame implements ActionListener {
         codeScrollPane.setBounds(30, 8, 551, 398);
         contentPanel.add(codeScrollPane);
         
-     // display panel para sa output
+        // display panel para sa output
         JPanel displayPanel = new JPanel();
         displayPanel.setBackground(new Color(255, 235, 205));
         displayPanel.setBounds(212, 0, 611, 149);
@@ -169,7 +170,7 @@ public class MainDashboard extends JFrame implements ActionListener {
         btnExit.setFont(new Font("Georgia", Font.BOLD, 15));
         btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				group info = new group();
+				Group info = new Group();
 			      info.setVisible(true);
 			      info.setLocationRelativeTo(null);
 			      dispose();
@@ -180,20 +181,19 @@ public class MainDashboard extends JFrame implements ActionListener {
         contentPane.add(btnExit);
     }
     
-
- // Method para sa Lexical Analysis
+    // method para sa Lexical Analysis
     private void performLexicalAnalysis() {
         String code = codeTextArea.getText();
         
         // instance
-        CompilerComponents analyzer = new CompilerComponents();
+        Components analyzer = new Components();
         
-        // Perform lexical analysis
+        // perform lexical analysis
         String lexAnalysisResult = analyzer.lexicalAnalysis(code);
         
         StringBuilder output = new StringBuilder();
         output.append("Lexical Analysis Results:\n\n");
-        output.append("Tokens: ").append(lexAnalysisResult).append("\n\n");
+        output.append("Tokens: ").append(lexAnalysisResult).append("\n");
         
         outputTextArea.setText(output.toString());
         lexicalPassed = true; 
@@ -206,16 +206,16 @@ public class MainDashboard extends JFrame implements ActionListener {
         }
     }
 
- // Method para sa Syntax Analysis
+    // Method para sa Syntax Analysis
     private void performSyntaxAnalysis() {
         String code = codeTextArea.getText();
 
-        CompilerComponents analyzer = new CompilerComponents();
+        Components analyzer = new Components();
 
-        // Calls and performs yung lexical analysis
+        // calls and performs yung lexical analysis
         String lexAnalysisResult = analyzer.lexicalAnalysis(code);
 
-     // Perform syntax analysis
+        // perform syntax analysis
         boolean syntaxValid = analyzer.syntaxAnalysis(lexAnalysisResult);
 
         StringBuilder output = new StringBuilder();
@@ -234,20 +234,18 @@ public class MainDashboard extends JFrame implements ActionListener {
         }
     }
 
+    // method para sa Semantic Analysis
+    private void performSemanticAnalysis() {
+        String code = codeTextArea.getText();
+        List<String> codeLines = new ArrayList<>(Arrays.asList(code.split("\n")));
 
- // Method para sa Semantic Analysis
- private void performSemanticAnalysis() {
-    String code = codeTextArea.getText();
-    List<String> codeLines = new ArrayList<>(Arrays.asList(code.split("\n")));
+        Components analyzer = new Components();
 
-    CompilerComponents analyzer = new CompilerComponents();
+        // perform semantic analysis
+        String semAnalysisResult = analyzer.semanticAnalysis(codeLines);
 
-    // Perform semantic analysis
-    String semAnalysisResult = analyzer.semanticAnalysis(codeLines);
-
-    outputTextArea.setText("Semantic Analysis Results:\n\n" + semAnalysisResult);
-}
-
+        outputTextArea.setText("Semantic Analysis Results:\n\n" + semAnalysisResult);
+    }
 
     private void clearAll() {
         codeTextArea.setText("");
@@ -260,6 +258,6 @@ public class MainDashboard extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Handle other actions if needed
+        // handle other actions if needed
     }
 }

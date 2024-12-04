@@ -5,15 +5,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CompilerComponents {
+public class Components {
     private static final String[] DATA_TYPES = {"int", "double", "String", "boolean", "char", "float", "long"};
 
+    //lexical analysis method
     public String lexicalAnalysis(String code) {
         StringBuilder tokenizedLines = new StringBuilder();
-        // Use a different split pattern to preserve string literals
         Pattern pattern = Pattern.compile("\"[^\"]*\"|[\\s;=]|([^\\s;=\"]+)");
         String[] lines = code.split("\n");
-
+        
+        //data types to check in syntax
         for (String line : lines) {
             StringBuilder tokenizedLine = new StringBuilder();
             Matcher matcher = pattern.matcher(line.trim());
@@ -32,7 +33,7 @@ public class CompilerComponents {
                     tokenizedLine.append("<value> ");
                 } else if (token.equals(";")) {
                     tokenizedLine.append("<delimiter> ");
-                } else if (!token.matches("\\s+")) { // ignore whitespace
+                } else if (!token.matches("\\s+")) { 
                     tokenizedLine.append("<unknown> ");
                 }
             }
@@ -49,25 +50,30 @@ public class CompilerComponents {
         return matcher.matches();
     }
 
+    //method for semantic analysis
     public void semanticAnalysis(String code) {
         List<String> codeLines = new ArrayList<>(Arrays.asList(code.split("\n")));
-        semanticAnalysisForLines(codeLines);
+        String result = semanticAnalysis(codeLines);
+        System.out.println(result);
     }
 
-    public void semanticAnalysisForLines(List<String> codeLines) {
-        boolean hasError = false;
+    public String semanticAnalysis(List<String> codeLines) {
         StringBuilder result = new StringBuilder();
+        boolean hasError = false;
 
         for (String line : codeLines) {
             String lineResult = semanticAnalysisSingleLine(line);
-            if (lineResult.contains("Error")) {
+            if (lineResult.startsWith("Error:")) {
                 hasError = true;
             }
             result.append(lineResult).append("\n");
         }
 
-        System.out.println(hasError ? "Semantic Analysis Failed" : "Semantic Analysis Passed");
-        System.out.println(result.toString());
+        if (hasError) {
+            return "Semantic Analysis Failed";
+        } else {
+            return "Semantic Analysis Passed";
+        }
     }
 
     public String semanticAnalysisSingleLine(String line) {
@@ -84,30 +90,26 @@ public class CompilerComponents {
         if (tokens.length == 4 && !isValueCompatibleWithType(dataType, value)) {
             return "Error: Type mismatch - " + value + " is not compatible with " + dataType;
         }
-    
         return "Valid declaration/initialization";
     }
     
     private boolean isDataType(String token) {
         return Arrays.asList(DATA_TYPES).contains(token);
     }
-    
     private boolean isIdentifier(String token) {
         return token.matches("[a-zA-Z][a-zA-Z0-9]*");
     }
-    
     private boolean isOperator(String token) {
         return token.equals("=");
     }
-    
     private boolean isValue(String token) {
         token = token.replaceAll(";$", "");
         
-        // Check for different types of values
-        return token.matches("\\d+") || // integers
-               token.matches("\\d*\\.\\d+") || // decimals
-               token.matches("\".*\"") || // strings
-               token.matches("true|false"); // booleans
+        // Check different types of values (integers, decimals, strings, booleans)
+        return token.matches("\\d+") || 
+               token.matches("\\d*\\.\\d+") || 
+               token.matches("\".*\"") || 
+               token.matches("true|false");
     }
     
     private boolean isValueCompatibleWithType(String dataType, String value) {
@@ -120,30 +122,11 @@ public class CompilerComponents {
             case "float":
                 return value.matches("\\d*\\.\\d+") || value.matches("\\d+");
             case "String":
-                return value.matches("\"[^\"]*\""); // Updated regex to match non-empty string literals
+                return value.matches("\"[^\"]*\""); 
             case "boolean":
                 return value.matches("true|false");
             default:
                 return false;
-        }
-    }
-
-    public String semanticAnalysis(List<String> codeLines) {
-        StringBuilder result = new StringBuilder();
-        boolean hasError = false;
-    
-        for (String line : codeLines) {
-            String lineResult = semanticAnalysisSingleLine(line);
-            if (lineResult.startsWith("Error:")) {
-                hasError = true;
-            }
-            result.append(lineResult).append("\n");
-        }
-    
-        if (hasError) {
-            return "Semantic Analysis Failed";
-        } else {
-            return "Semantic Analysis Passed";
         }
     }
 }

@@ -32,6 +32,7 @@ public class Main extends JFrame implements ActionListener {
 			setBackground(new Color(0, 0, 0));
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 850, 500);
+			setResizable(false);
 			contentPane = new JPanel();
 			contentPane.setBackground(new Color(255, 235, 205));
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,7 +54,7 @@ public class Main extends JFrame implements ActionListener {
 	        btnProceed.setBorder(BorderFactory.createEtchedBorder());
 			btnProceed.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					MainDashboard home = new MainDashboard();
+					Dashboard home = new Dashboard();
 				      home.setVisible(true);
 				      home.setLocationRelativeTo(null);
 				      dispose();
@@ -67,7 +68,7 @@ public class Main extends JFrame implements ActionListener {
 			JButton btnNewButton = new JButton("Exit");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cancel exApp = new cancel();
+					Exit exApp = new Exit();
 				      exApp.setVisible(true);
 				      exApp.setLocationRelativeTo(null);
 				      dispose();
