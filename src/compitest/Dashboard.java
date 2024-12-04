@@ -16,8 +16,8 @@ public class Dashboard extends JFrame implements ActionListener {
     private JPanel contentPane;
     private JTextArea codeTextArea;
     private JTextArea outputTextArea;
-    private JButton syntaxButton;
-    private JButton semanticButton;
+    private JButton btnSyntax;
+    private JButton btnSemantic;
     private boolean lexicalPassed = false;
     private boolean syntaxPassed = false;
     
@@ -103,23 +103,23 @@ public class Dashboard extends JFrame implements ActionListener {
         btnLexical.addActionListener(e -> performLexicalAnalysis());
         buttonPanel.add(btnLexical);
         
-        syntaxButton = new JButton("Syntax Analysis");
-        syntaxButton.setBackground(new Color(255, 228, 196));
-        syntaxButton.setForeground(new Color(160, 82, 45));
-        syntaxButton.setFont(new Font("Georgia", Font.BOLD, 17));
-        syntaxButton.setBounds(10, 275, 193, 40);
-        syntaxButton.addActionListener(e -> performSyntaxAnalysis());
-        syntaxButton.setEnabled(false);
-        buttonPanel.add(syntaxButton);
+        btnSyntax = new JButton("Syntax Analysis");
+        btnSyntax.setBackground(new Color(255, 228, 196));
+        btnSyntax.setForeground(new Color(160, 82, 45));
+        btnSyntax.setFont(new Font("Georgia", Font.BOLD, 17));
+        btnSyntax.setBounds(10, 275, 193, 40);
+        btnSyntax.addActionListener(e -> performSyntaxAnalysis());
+        btnSyntax.setEnabled(false);
+        buttonPanel.add(btnSyntax);
         
-        semanticButton = new JButton("Semantic Analysis");
-        semanticButton.setBackground(new Color(255, 228, 196));
-        semanticButton.setForeground(new Color(160, 82, 45));
-        semanticButton.setFont(new Font("Georgia", Font.BOLD, 15));
-        semanticButton.setBounds(10, 330, 193, 40);
-        semanticButton.addActionListener(e -> performSemanticAnalysis());
-        semanticButton.setEnabled(false);
-        buttonPanel.add(semanticButton);
+        btnSemantic = new JButton("Semantic Analysis");
+        btnSemantic.setBackground(new Color(255, 228, 196));
+        btnSemantic.setForeground(new Color(160, 82, 45));
+        btnSemantic.setFont(new Font("Georgia", Font.BOLD, 15));
+        btnSemantic.setBounds(10, 330, 193, 40);
+        btnSemantic.addActionListener(e -> performSemanticAnalysis());
+        btnSemantic.setEnabled(false);
+        buttonPanel.add(btnSemantic);
         
         // clear button
         JButton btnClear = new JButton("CLEAR");
@@ -197,7 +197,7 @@ public class Dashboard extends JFrame implements ActionListener {
         
         outputTextArea.setText(output.toString());
         lexicalPassed = true; 
-        syntaxButton.setEnabled(lexicalPassed);
+        btnSyntax.setEnabled(lexicalPassed);
         
         if (lexicalPassed) {
             outputTextArea.append("\nLexical Analysis Passed!");
@@ -224,7 +224,8 @@ public class Dashboard extends JFrame implements ActionListener {
         output.append("Actual Pattern: ").append(lexAnalysisResult).append("\n\n");
 
         syntaxPassed = syntaxValid;
-        semanticButton.setEnabled(syntaxPassed);
+        btnSemantic.setEnabled(syntaxPassed);
+        btnSyntax.setEnabled(false);
 
         outputTextArea.setText(output.toString());
         if (syntaxValid) {
@@ -245,6 +246,7 @@ public class Dashboard extends JFrame implements ActionListener {
         String semAnalysisResult = analyzer.semanticAnalysis(codeLines);
 
         outputTextArea.setText("Semantic Analysis Results:\n\n" + semAnalysisResult);
+        btnSemantic.setEnabled(false);
     }
 
     private void clearAll() {
@@ -252,8 +254,8 @@ public class Dashboard extends JFrame implements ActionListener {
         outputTextArea.setText("");
         lexicalPassed = false;
         syntaxPassed = false;
-        syntaxButton.setEnabled(false);
-        semanticButton.setEnabled(false);
+        btnSyntax.setEnabled(false);
+        btnSemantic.setEnabled(false);
     }
 
     @Override
