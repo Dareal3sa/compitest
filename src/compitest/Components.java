@@ -25,13 +25,13 @@ public class Components {
                 
                 if (isDataType(token)) {
                     tokenizedLine.append("<data_type> ");
+                } else if (isValue(token)) {
+                    tokenizedLine.append("<value> ");
                 } else if (isIdentifier(token)) {
                     tokenizedLine.append("<identifier> ");
                 } else if (isOperator(token)) {
                     tokenizedLine.append("<operator> ");
-                } else if (isValue(token)) {
-                    tokenizedLine.append("<value> ");
-                } else if (token.equals(";")) {
+                }  else if (token.equals(";")) {
                     tokenizedLine.append("<delimiter> ");
                 } else if (!token.matches("\\s+")) { 
                     tokenizedLine.append("<unknown> ");
