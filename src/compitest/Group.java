@@ -35,7 +35,7 @@ public class Group extends JFrame {
 	 */
 	public Group() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 887, 620);
+		setBounds(100, 100, 1280, 960);
     	setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 235, 205));
