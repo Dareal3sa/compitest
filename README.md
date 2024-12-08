@@ -1,18 +1,23 @@
-## Getting Started
+# COMPITEST
+Java Compiler Project for Theory of Programming Language Course
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+# Description
 
-## Folder Structure
+Our project is a GUI application for performing lexical, syntax, and semantic analysis on source code. It allows users to analyze code step-by-step, displaying results for each stage in a dedicated Result Text Area. Users can load source code files into the Code Text Area to initiate analysis. Key features include:
 
-The workspace contains two folders by default, where:
+* Lexical Analysis: Identifies tokens and processes the structure of the code, enabling the syntax analysis button after successful results.
+* Syntax Analysis: Checks the grammatical structure, activating semantic analysis upon success.
+* Semantic Analysis: Verifies the logical consistency of the code.
+* Reset Functionality: Clears all input and output fields for reusability.
+* User-friendly controls ensure buttons are only enabled when prerequisites are met.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+This tool is designed to demonstrate the individual roles of lexical, syntax, and semantic analysis in a streamlined and interactive manner.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+# Home Section
+![image](https://github.com/Dareal3sa/compitest/blob/main/images/Compitest%20Home.jpg)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+COMPITEST 
+![image](https://github.com/Dareal3sa/compitest/blob/main/images/Compitest.jpg)
 
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+# How to use COMPITEST
+https://github.com/Dareal3sa/compitest/blob/main/images/How%20to%20use%20COMPITEST.jpg
