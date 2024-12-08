@@ -23,5 +23,6 @@ COMPITEST
 ![image](https://github.com/Dareal3sa/compitest/blob/main/images/How%20to%20use%20COMPITEST.jpg)
 
 In collaboration with:
+Trisha Daryl Manampan (https://github.com/DarylTManampan)
 Francine Ella G. Macabales (https://github.com/francineella)
 Vina Marie C. Solitario (https://github.com/VinaSolitario)
