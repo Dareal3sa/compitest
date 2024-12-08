@@ -113,7 +113,7 @@ public class Components {
                token.matches("\\d*\\.\\d+") || 
                token.matches("\".*\"") || 
                token.matches("'.'") ||
-               token.matches("true|false")
+               token.matches("true|false") ||
                token.matches("\\d+[fF]") ||        
                token.matches("\\d+L"); 
     }
