@@ -20,4 +20,4 @@ COMPITEST
 ![image](https://github.com/Dareal3sa/compitest/blob/main/images/Compitest.jpg)
 
 # How to use COMPITEST
-https://github.com/Dareal3sa/compitest/blob/main/images/How%20to%20use%20COMPITEST.jpg
+![image](https://github.com/Dareal3sa/compitest/blob/main/images/How%20to%20use%20COMPITEST.jpg)
