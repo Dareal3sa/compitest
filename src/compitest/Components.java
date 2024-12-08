@@ -113,7 +113,9 @@ public class Components {
                token.matches("\\d*\\.\\d+") || 
                token.matches("\".*\"") || 
                token.matches("'.'") ||
-               token.matches("true|false");
+               token.matches("true|false") ||
+               token.matches("\\d+[fF]") ||        
+               token.matches("\\d+L"); 
     }
     
     private boolean isValueCompatibleWithType(String dataType, String value) {
@@ -124,7 +126,7 @@ public class Components {
                 return value.matches("\\d+");
             case "double":
             case "float":
-                return value.matches("\\d*\\.\\d+") || value.matches("\\d+");
+                return value.matches("\\d*\\.\\d+") || value.matches("\\d+") || value.matches("\\d*\\.\\d+[fF]") || value.matches("\\d+L");
             case "String":
                 return value.matches("\"[^\"]*\""); 
             case "char":
