@@ -24,7 +24,7 @@ This tool is designed to demonstrate the individual roles of lexical, syntax, an
 
 In collaboration with:
 
-Trisha Daryl Manampan (https://github.com/DarylTManampan)
+Daryl Trisha Manampan (https://github.com/DarylTManampan)
 
 Francine Ella G. Macabales (https://github.com/francineella)
 
