@@ -16,7 +16,7 @@ This tool is designed to demonstrate the individual roles of lexical, syntax, an
 # Home Section
 ![image](https://github.com/Dareal3sa/compitest/blob/main/images/Compitest%20Home.jpg)
 
-COMPITEST 
+# COMPITEST 
 ![image](https://github.com/Dareal3sa/compitest/blob/main/images/Compitest.jpg)
 
 # How to use COMPITEST
