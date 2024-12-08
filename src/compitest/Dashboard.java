@@ -37,7 +37,7 @@ public class Dashboard extends JFrame implements ActionListener {
     	setTitle("compiler");
     	setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 895, 626);
+        setBounds(100, 100, 1280, 960);
         mainContentsPane();
     }
 
@@ -50,17 +50,16 @@ public class Dashboard extends JFrame implements ActionListener {
         
         // button panel
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBounds(0, 0, 250, 900);
         buttonPanel.setBackground(new Color(255, 235, 205));
-        buttonPanel.setBounds(0, 0, 213, 566);
         contentPane.add(buttonPanel);
-        buttonPanel.setLayout(null);
         
         // open file button
         JButton btnOpen = new JButton("OPEN");
+        btnOpen.setBounds(28, 116, 193, 40);
         btnOpen.setBackground(new Color(255, 228, 196));
         btnOpen.setForeground(new Color(160, 82, 45));
         btnOpen.setFont(new Font("Georgia", Font.BOLD, 20));
-        btnOpen.setBounds(10, 165, 193, 40);
         btnOpen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
@@ -92,93 +91,92 @@ public class Dashboard extends JFrame implements ActionListener {
                 }
             }
         });
+        buttonPanel.setLayout(null);
         buttonPanel.add(btnOpen);
         
         // aalysis buttons
         JButton btnLexical = new JButton("Lexical Analysis");
+        btnLexical.setBounds(28, 272, 193, 40);
         btnLexical.setForeground(new Color(160, 82, 45));
         btnLexical.setBackground(new Color(255, 228, 196));
         btnLexical.setFont(new Font("Georgia", Font.BOLD, 17));
-        btnLexical.setBounds(10, 220, 193, 40);
         btnLexical.addActionListener(e -> performLexicalAnalysis());
         buttonPanel.add(btnLexical);
         
         btnSyntax = new JButton("Syntax Analysis");
+        btnSyntax.setBounds(28, 428, 193, 40);
         btnSyntax.setBackground(new Color(255, 228, 196));
         btnSyntax.setForeground(new Color(160, 82, 45));
         btnSyntax.setFont(new Font("Georgia", Font.BOLD, 17));
-        btnSyntax.setBounds(10, 275, 193, 40);
         btnSyntax.addActionListener(e -> performSyntaxAnalysis());
         btnSyntax.setEnabled(false);
         buttonPanel.add(btnSyntax);
         
         btnSemantic = new JButton("Semantic Analysis");
+        btnSemantic.setBounds(28, 584, 193, 40);
         btnSemantic.setBackground(new Color(255, 228, 196));
         btnSemantic.setForeground(new Color(160, 82, 45));
         btnSemantic.setFont(new Font("Georgia", Font.BOLD, 15));
-        btnSemantic.setBounds(10, 330, 193, 40);
         btnSemantic.addActionListener(e -> performSemanticAnalysis());
         btnSemantic.setEnabled(false);
         buttonPanel.add(btnSemantic);
         
         // clear button
         JButton btnClear = new JButton("CLEAR");
+        btnClear.setBounds(28, 740, 193, 40);
         btnClear.setBackground(new Color(255, 228, 196));
         btnClear.setForeground(new Color(160, 82, 45));
         btnClear.setFont(new Font("Georgia", Font.BOLD, 17));
-        btnClear.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+        btnClear.setBorder(new LineBorder(new Color(0, 0, 0)));
         btnClear.setBorder(BorderFactory.createEtchedBorder());
-        btnClear.setBounds(10, 410, 193, 40);
         btnClear.addActionListener(e -> clearAll());
         buttonPanel.add(btnClear);
         
         // content panel para sa input text or variables na itetest
         JPanel contentPanel = new JPanel();
+        contentPanel.setBounds(255, 220, 950, 630);
         contentPanel.setBackground(new Color(255, 235, 205));
-        contentPanel.setBounds(212, 151, 611, 368);
         contentPane.add(contentPanel);
         contentPanel.setLayout(null);
         
         codeTextArea = new JTextArea();
         codeTextArea.setBackground(new Color(255, 228, 196));
-        codeTextArea.setBounds(30, 8, 551, 398);
-        codeTextArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        codeTextArea.setBounds(30, 28, 905, 595);
+        codeTextArea.setFont(new Font("Monospaced", Font.PLAIN, 20));
         JScrollPane codeScrollPane = new JScrollPane(codeTextArea);
-        codeScrollPane.setBounds(30, 8, 551, 398);
+        codeScrollPane.setBounds(30, 28, 905, 595);
         contentPanel.add(codeScrollPane);
         
         // display panel para sa output
         JPanel displayPanel = new JPanel();
+        displayPanel.setBounds(255, 0, 950, 215);
         displayPanel.setBackground(new Color(255, 235, 205));
-        displayPanel.setBounds(212, 0, 611, 149);
         contentPane.add(displayPanel);
         displayPanel.setLayout(null);
 
         outputTextArea = new JTextArea();
         outputTextArea.setBackground(new Color(255, 228, 196));
         outputTextArea.setEditable(false);
-        outputTextArea.setBounds(28, 14, 555, 72);
-        outputTextArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        outputTextArea.setBounds(28, 14, 905, 190);
+        outputTextArea.setFont(new Font("Monospaced", Font.BOLD, 18));
         JScrollPane outputScrollPane = new JScrollPane(outputTextArea);
-        outputScrollPane.setBounds(28, 14, 555, 130);
+        outputScrollPane.setBounds(28, 14, 905, 190);
         displayPanel.add(outputScrollPane);
         
-        // exit button
-        JButton btnExit = new JButton("Group");
-        btnExit.setBackground(new Color(255, 228, 196));
-        btnExit.setForeground(new Color(160, 82, 45));
-        btnExit.setFont(new Font("Georgia", Font.BOLD, 15));
-        btnExit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Group info = new Group();
-			      info.setVisible(true);
-			      info.setLocationRelativeTo(null);
-			      dispose();
-			}
-		
-		});
-        btnExit.setBounds(750, 540, 100, 30);
-        contentPane.add(btnExit);
+        JButton btnReturn = new JButton("Back");
+        btnReturn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Main entry = new Main();
+				      entry.setVisible(true);
+				      entry.setLocationRelativeTo(null);
+				      dispose();
+				}
+        });
+        btnReturn.setFont(new Font("Impact", Font.PLAIN, 9));
+        btnReturn.setForeground(new Color(255, 239, 213));
+        btnReturn.setBackground(new Color(0, 0, 0));
+        btnReturn.setBounds(1135, 861, 60, 50);
+        contentPane.add(btnReturn);
     }
     
     // method para sa Lexical Analysis
