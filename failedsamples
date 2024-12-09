@@ -1,0 +1,10 @@
+FAILED SAMPLES PER ANALYSIS
+
+>for Lexical
+1st&Variable = 10;
+
+>for Syntax
+x = 10 int;
+
+>for Semantic
+int x = "world";
