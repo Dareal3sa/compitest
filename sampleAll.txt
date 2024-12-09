@@ -1,0 +1,6 @@
+int x = 10;
+boolean isValue = true;
+String name = "Alden";
+double top = 1.5;
+char letter = 'o';
+float num = 1.25f;
