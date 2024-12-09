@@ -9,40 +9,40 @@ public class Components {
     private static final String[] DATA_TYPES = {"int", "double", "String", "boolean", "char", "float", "long"};
 
     //lexical analysis method
-    public String lexicalAnalysis(String code) {
-        StringBuilder tokenizedLines = new StringBuilder();
-        Pattern pattern = Pattern.compile("\"[^\"]*\"|[a-zA-Z][a-zA-Z0-9]*|[\\d\\.]+|[=;]|\\S");
-        String[] lines = code.split("\n");
+public String lexicalAnalysis(String code) {
+    StringBuilder tokenizedLines = new StringBuilder();
+    Pattern pattern = Pattern.compile("\"[^\"]*\"|'.'|[a-zA-Z][a-zA-Z0-9]*|[\\d\\.]+|[=;]|\\S");
+    String[] lines = code.split("\n");
+    
+    // data types to check in syntax
+    for (String line : lines) {
+        StringBuilder tokenizedLine = new StringBuilder();
+        Matcher matcher = pattern.matcher(line.trim());
         
-        //data types to check in syntax
-        for (String line : lines) {
-            StringBuilder tokenizedLine = new StringBuilder();
-            Matcher matcher = pattern.matcher(line.trim());
+        while (matcher.find()) {
+            String token = matcher.group().trim();
+            if (token.isEmpty()) continue;
             
-            while (matcher.find()) {
-                String token = matcher.group().trim();
-                if (token.isEmpty()) continue;
-                
-                if (isDataType(token)) {
-                    tokenizedLine.append("<data_type> ");
-                } else if (isValue(token)) {
-                    tokenizedLine.append("<value> ");
-                } else if (isIdentifier(token)) {
-                    tokenizedLine.append("<identifier> ");
-                } else if (isOperator(token)) {
-                    tokenizedLine.append("<operator> ");
-                }  else if (token.equals(";")) {
-                    tokenizedLine.append("<delimiter> ");
-                } else if (!token.matches("\\s+")) { 
-                    tokenizedLine.append("<unknown> ");
-                }
-            }
-            if (tokenizedLine.length() > 0) {
-                tokenizedLines.append(tokenizedLine.toString().trim()).append("\n");
+            if (isDataType(token)) {
+                tokenizedLine.append("<data_type> ");
+            } else if (isValue(token)) {
+                tokenizedLine.append("<value> ");
+            } else if (isValidIdentifier(token)) { 
+                tokenizedLine.append("<identifier> ");
+            } else if (isOperator(token)) {
+                tokenizedLine.append("<operator> ");
+            } else if (token.equals(";")) {
+                tokenizedLine.append("<delimiter> ");
+            } else {
+                tokenizedLine.append("\n<error> Invalid token: ").append(token).append(" ");
             }
         }
-        return tokenizedLines.toString().trim();
+        if (tokenizedLine.length() > 0) {
+            tokenizedLines.append(tokenizedLine.toString().trim()).append("\n");
+        }
     }
+    return tokenizedLines.toString().trim();
+}
 
     public boolean syntaxAnalysis(String lexAnalysisResult) {
         Pattern validPattern = Pattern.compile("(<data_type> <identifier>(?: <operator> <value>)? <delimiter>)");
@@ -100,20 +100,27 @@ public class Components {
         return Arrays.asList(DATA_TYPES).contains(token);
     }
     private boolean isIdentifier(String token) {
-        return token.matches("[a-zA-Z][a-zA-Z0-9]*");
+        return token.matches("[a-zA-Z_][a-zA-Z0-9]*");
     }
+
+    private boolean isValidIdentifier(String token) {
+        return token.matches("[a-zA-Z_][a-zA-Z0-9]*") && !token.contains("&") && !token.contains("$") && !token.startsWith("1"); // Add more invalid characters as needed
+    }
+
     private boolean isOperator(String token) {
         return token.equals("=");
     }
     private boolean isValue(String token) {
         token = token.replaceAll(";$", "");
         
-        // Check different types of values (integers, decimals, strings, booleans)
+        // Check different types of values (integers, decimals, strings, float, chars, booleans)
         return token.matches("\\d+") || 
                token.matches("\\d*\\.\\d+") || 
                token.matches("\".*\"") || 
                token.matches("'.'") ||
-               token.matches("true|false");
+               token.matches("true|false") ||
+               token.matches("\\d+[fF]") ||        
+               token.matches("\\d+L"); 
     }
     
     private boolean isValueCompatibleWithType(String dataType, String value) {
@@ -124,7 +131,7 @@ public class Components {
                 return value.matches("\\d+");
             case "double":
             case "float":
-                return value.matches("\\d*\\.\\d+") || value.matches("\\d+");
+                return value.matches("\\d*\\.\\d+") || value.matches("\\d+") || value.matches("\\d*\\.\\d+[fF]") || value.matches("\\d+L");
             case "String":
                 return value.matches("\"[^\"]*\""); 
             case "char":

@@ -193,8 +193,8 @@ public class Dashboard extends JFrame implements ActionListener {
         output.append("Lexical Analysis Results:\n\n");
         output.append("Tokens: ").append(lexAnalysisResult).append("\n");
         
+        lexicalPassed = !lexAnalysisResult.contains("<error>");
         outputTextArea.setText(output.toString());
-        lexicalPassed = true; 
         btnSyntax.setEnabled(lexicalPassed);
         
         if (lexicalPassed) {
